@@ -1,6 +1,8 @@
 # LazyJSONBenchmark
 
-A hacky benchmark test for LazyJSON. All times referenced are in miliseconds. All tests were executed on a late 2013 13" macbook pro with a 2.4ghz core i5 cpu. If you have comments or suggestions for improvements to the benchmark, please reach out to me or file an issue here on github!
+This repo contains a hacky benchmark test for LazyJSON for Java. You can find out more about LazyJSON at [https://github.com/doubledutch/LazyJSON](https://github.com/doubledutch/LazyJSON)
+
+All times referenced are in miliseconds. All tests were executed on a late 2013 13" macbook pro with a 2.4ghz core i5 cpu. If you have comments or suggestions for improvements to the benchmark, please reach out to me or file an issue here on github!
 
 ## SmallObject Tests
 
@@ -193,7 +195,7 @@ Boon | 10.468966 | 25.870486 | 14.332774 | 13.447765
 
 I am sure I will get feedback saying that I'm using the wrong version of the different libraries I have compared LazyJSON to or that the way I'm using them is all wrong, or that the test is inherently unfair, or that the benchmark code was set up wrong... and a thousand other issues and comments. The purpose of this benchmark isn't to show that other libraries are slow, but instead to show that LazyJSON is extremely fast for its intended purpose - and that it turns out that it is competitively fast for the general use case too.
 
-Please sent me all of your comments and help me improve this test so it shows off the other libraries using their best practices!
+Please send me all of your comments and help me improve this test so it shows off the other libraries using their best practices!
 
 The libraries used for this test were
 

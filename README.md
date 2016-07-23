@@ -72,7 +72,7 @@ It is meaningfully faster than the fastest class based parser I have found (Loga
 
 ## MediumObject Tests
 
-These tests all use an array containing 1000 copies of a medium suzed json object as their input. This object was created to mimic some of the simple data envelopes in use at DoubleDutch. It uses the SimpleObject from the last test as its payload. While still generated with some aspect of randomness, it generaly looks as follows:
+These tests all use an array containing 1000 copies of a medium sized json object as their input. This object was created to mimic some of the simple data envelopes in use at DoubleDutch. It uses the SimpleObject from the last test as its payload. While still generated with some aspect of randomness, it generaly looks as follows:
 
 ```javascript
 {
@@ -100,6 +100,8 @@ The source string for the MediumObject tests take up 297,193 characters.
 
 ### MediumObject Parse
 
+This test is executed in the same way as the SmallObject parse test. As the object size and complexity increases, LazyJSON gains an even bigger advantage over the other libraries tested.
+
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
 json.org | 5.605524 | 16.128994 | 8.785413 | 8.150946
@@ -112,27 +114,95 @@ Boon | 3.130705 | 7.343901 | 4.834363 | 4.856269
 LoganSquare | 2.613197 | 7.311305 | 4.6290735 | 4.54955
 
 
-Running MediumObject split and serialize test
- + json.org | 11.026429 | 23.688277 | 14.817645 | 14.202038
- + GSON JsonParser based | 5.3741 | 13.533694 | 8.3247245 | 7.912941
- + Jackson ObjectMapper | 4.826591 | 11.808949 | 7.1937715 | 7.05345
- + LazyJSON | 1.021659 | 3.536178 | 1.866120625 | 1.8628
- + GSON class based | 7.554717 | 20.371266 | 10.714443 | 10.258093
- + Boon | 9.209956 | 17.921605 | 11.759534 | 11.150213
- + LoganSquare | 4.333113 | 10.601473 | 6.776118 | 6.524095
-Generating LargeObject batch data
-Running LargeObject parse test
- + json.org | 7.75176 | 22.426924 | 11.096008 | 10.59668
- + GSON JsonParser | 3.703044 | 9.933935 | 5.780482 | 5.690398
- + Jackson ObjectMapper | 2.882437 | 8.55358 | 5.165173 | 4.887188
- + Jackson JsonParser | 1.982652 | 6.068085 | 3.27319225 | 3.2957
- + LazyJSON | 1.590227 | 3.763087 | 2.54875 | 2.566992
- + GSON class based | 4.14453 | 12.330691 | 6.4768755 | 6.16929
- + Boon | 4.100606 | 9.142838 | 5.808073 | 5.70455
-Running LargeObject split and serialize test
- + json.org | 16.193432 | 34.084046 | 20.677518 | 19.336549
- + GSON JsonParser based | 7.254918 | 17.019365 | 10.777558 | 10.150436
- + Jackson ObjectMapper | 5.149789 | 13.676147 | 7.4314225 | 7.19378
- + LazyJSON | 1.545074 | 4.47108 | 2.73187325 | 2.778728
- + GSON class based | 8.921176 | 20.0559 | 12.446913 | 12.08505
- + Boon | 10.468966 | 25.870486 | 14.332774 | 13.447765
+### MediumObject Parse, Split and Serialize
+
+As can be seen in this test, the original use case for LazyJSON continues to win out performance wise as the object size and complexity grows.
+
+JSON Library | Min | Max | Avg | Median
+-------------|-----|-----|-----|-------
+json.org | 11.026429 | 23.688277 | 14.817645 | 14.202038
+GSON JsonParser based | 5.3741 | 13.533694 | 8.3247245 | 7.912941
+Jackson ObjectMapper | 4.826591 | 11.808949 | 7.1937715 | 7.05345
+LazyJSON | 1.021659 | 3.536178 | 1.866120625 | 1.8628
+GSON class based | 7.554717 | 20.371266 | 10.714443 | 10.258093
+Boon | 9.209956 | 17.921605 | 11.759534 | 11.150213
+LoganSquare | 4.333113 | 10.601473 | 6.776118 | 6.524095
+
+## LargeObject Tests
+
+These tests all use an array containing 1000 copies of a larger object based loosely on the format of the metric data we use at DoubleDutch. It generaly looks as follows:
+
+```javascript
+{
+    "Context": {
+        "MetricVersion": 99,
+        "Identifier": "statusUpdate",
+        "MetaData": {"ActivityId": 4340050}
+    },
+    "User": {"GlobalUserId": "deadbeef-dead-beef-dead-beef00000003"},
+    "SchemaVersion": 1,
+    "Device": {
+        "DeviceType": "ios",
+        "BinaryVersion": "9.99.99",
+        "DeviceId": "deadbeef-dead-beef-dead-beef00000001",
+        "DeviceOSVersion": "9.3.2",
+        "MMMInfo": "iPhone7,2"
+    },
+    "Application": {
+        "BundleId": "deadbeef-dead-beef-dead-beef00000005",
+        "ApplicationId": "deadbeef-dead-beef-dead-beef00000004"
+    },
+    "Created": 1469313573338,
+    "Session": {
+        "EventId": 291,
+        "SessionId": "deadbeef-dead-beef-dead-beef00000002"
+    }
+}
+````
+
+The source string for the LargeObject tests take up 551,768 characters.
+
+### LargeObject Parse
+
+Once again, this test is executed in the same way as the SmallObject parse test. As the object size and complexity increases, LazyJSON gains an even bigger advantage over the other libraries tested. This test does not include LoganSquare as I was too Lazy to figure out how to get it to parse this object (I suspect it can't deal with the inner classes, but haven't investigated the matter). 
+
+JSON Library | Min | Max | Avg | Median
+-------------|-----|-----|-----|-------
+json.org | 7.75176 | 22.426924 | 11.096008 | 10.59668
+GSON JsonParser | 3.703044 | 9.933935 | 5.780482 | 5.690398
+Jackson ObjectMapper | 2.882437 | 8.55358 | 5.165173 | 4.887188
+Jackson JsonParser | 1.982652 | 6.068085 | 3.27319225 | 3.2957
+LazyJSON | 1.590227 | 3.763087 | 2.54875 | 2.566992
+GSON class based | 4.14453 | 12.330691 | 6.4768755 | 6.16929
+Boon | 4.100606 | 9.142838 | 5.808073 | 5.70455
+
+### LargeObject Parse, Split and Serialize
+
+As can be seen in this test, the original use case for LazyJSON continues to win out performance wise as the object size and complexity grows.
+
+JSON Library | Min | Max | Avg | Median
+-------------|-----|-----|-----|-------
+json.org | 16.193432 | 34.084046 | 20.677518 | 19.336549
+GSON JsonParser based | 7.254918 | 17.019365 | 10.777558 | 10.150436
+Jackson ObjectMapper | 5.149789 | 13.676147 | 7.4314225 | 7.19378
+LazyJSON | 1.545074 | 4.47108 | 2.73187325 | 2.778728
+GSON class based | 8.921176 | 20.0559 | 12.446913 | 12.08505
+Boon | 10.468966 | 25.870486 | 14.332774 | 13.447765
+
+## Test Procedure and Library Versions
+
+I am sure I will get feedback saying that I'm using the wrong version of the different libraries I have compared LazyJSON to or that the way I'm using them is all wrong, or that the test is inherently unfair, or that the benchmark code was set up wrong... and a thousand other issues and comments. The purpose of this benchmark isn't to show that other libraries are slow, but instead to show that LazyJSON is extremely fast for its intended purpose - and that it turns out that it is competitively fast for the general use case too.
+
+Please sent me all of your comments and help me improve this test so it shows off the other libraries using their best practices!
+
+The libraries used for this test were
+
+JSON Library | version
+-------------|--------
+LazyJSON | 1.0.0
+GSON | 2.7
+org.json | 20140107
+Jackson | 2.8.0
+LoganSquare | 1.3.7
+Boon | 0.33
+

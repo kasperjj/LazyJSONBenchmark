@@ -77,6 +77,7 @@ public class Benchmark{
 
 	public Benchmark(){
 		try{
+			System.out.println(createLargeObject().toString(4));
 			System.out.println("Generating SmallObject batch data");
 			JSONArray array=new JSONArray();
 			for(int i=0;i<BATCH;i++){

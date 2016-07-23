@@ -84,6 +84,7 @@ public class Benchmark{
 			}
 			final String raw_batch_1=array.toString();
 			array=null;
+			System.out.println(" + Data size "+raw_batch_1.length());
 			System.out.println("Running SmallObject parse test");
 			testRawParsing(raw_batch_1);
 			testSmallObjectParsing(raw_batch_1);
@@ -102,6 +103,7 @@ public class Benchmark{
 			}
 			final String raw_batch_2=array.toString();
 			array=null;
+			System.out.println(" + Data size "+raw_batch_2.length());
 			System.out.println("Running MediumObject parse test");
 			testRawParsing(raw_batch_2);
 			testMediumObjectParsing(raw_batch_2);
@@ -117,6 +119,7 @@ public class Benchmark{
 			}
 			final String raw_batch_3=array.toString();
 			array=null;
+			System.out.println(" + Data size "+raw_batch_3.length());
 			System.out.println("Running LargeObject parse test");
 			testRawParsing(raw_batch_3);
 			testLargeObjectParsing(raw_batch_3);
@@ -151,9 +154,9 @@ public class Benchmark{
 					ObjectMapper mapper = new ObjectMapper();
 					JsonNode rootNode = mapper.readTree(data);
 					Iterator<JsonNode> ite = rootNode.iterator();				 
-					while (ite.hasNext()) {
-						JsonNode temp = ite.next(); 
-					}
+					// while (ite.hasNext()) {
+					//	JsonNode temp = ite.next(); 
+					// }
 				}catch(Exception e){
 					e.printStackTrace();
 				}

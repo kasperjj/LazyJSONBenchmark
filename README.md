@@ -1,7 +1,25 @@
 # LazyJSONBenchmark
 A hacky benchmark test for LazyJSON
 
-## Running SmallObject parse test
+## SmallObject Tests
+
+These tests all use an array containing 1000 copies of a small json object as their input. The object was specifically made to include each of JSON's scalar types as values. Each object has randomized numeric values, but generally looks as follows:
+
+```javascript
+{
+	"key1":"value1",
+	"key2":329898,
+	"key3":0.00231,
+	"key4":false,
+	"key5":null
+}
+````
+
+The source string for the SmallObject tests take up 83,182 characters.
+
+### SmallObject Parse
+
+This test simply makes each JSON parser parse the source string. In the case of the Jackson JsonParser it requests all tokens from the parser.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -13,6 +31,8 @@ LazyJSON | 0.344015 | 1.261705 | 0.747316875 | 0.72561
 GSON class based | 1.729185 | 4.541294 | 2.81834625 | 2.711455
 Boon | 1.314129 | 4.477466 | 2.4179545 | 2.221195
 LoganSquare | 1.020606 | 2.761957 | 1.812268375 | 1.800063
+
+
 
 Running SmallObject split and serialize test
  + json.org min:4.097546 max:9.678625 avg:6.3547365 med:6.17499

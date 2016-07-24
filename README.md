@@ -2,11 +2,11 @@
 
 This repo contains a hacky benchmark test for LazyJSON for Java. You can find out more about LazyJSON at [https://github.com/doubledutch/LazyJSON](https://github.com/doubledutch/LazyJSON)
 
-All times referenced are in miliseconds. All tests were executed on a late 2013 13" macbook pro with a 2.4ghz core i5 cpu. If you have comments or suggestions for improvements to the benchmark, please reach out to me or file an issue here on github!
+All times referenced are in miliseconds. All tests were executed on a late 2013 13" Macbook Pro with a 2.4ghz core i5 cpu. If you have comments or suggestions for improvements to the benchmark, please reach out to me or file an issue here on github!
 
 ## SmallObject Tests
 
-These tests all use an array containing 1000 copies of a small json object as their input. The object was specifically made to include each of JSON's scalar types as values. Each object has randomized numeric values, but generally looks as follows:
+These tests all use an array containing 1000 copies of a small JSON object as their input. The object was specifically made to include each of JSON's scalar types as values. Each object has randomized numeric values, but generally looks as follows:
 
 ```javascript
 {
@@ -22,7 +22,7 @@ The source string for the SmallObject tests take up 83,182 characters.
 
 ### SmallObject Parse
 
-This test simply makes each JSON parser parse the source string. In the case of the Jackson JsonParser it requests all tokens from the parser.
+This test simply makes each JSON parser parse the source string. In the case of the Jackson JSONParser, it requests all tokens from the parser.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -35,11 +35,11 @@ GSON class based | 1.729185 | 4.541294 | 2.81834625 | 2.711455
 Boon | 1.314129 | 4.477466 | 2.4179545 | 2.221195
 LoganSquare | 1.020606 | 2.761957 | 1.812268375 | 1.800063
 
-At this point, LazyJSON actually has a full AST structure build - much in the same way as Jackson's ObjectMapper API - yet, it is slightly faster than the fastest other parser in the test set: The Jacokson JsonParser, which does not build an AST.
+At this point, LazyJSON actually has a full AST structure build—much in the same way as Jackson's ObjectMapper API—yet, it is slightly faster than the other fastest parser in the test set: The Jacokson JSONParser, which does not build an AST.
 
 ### SmallObject Parse, Split and Serialize
 
-This test represents the actual initial use case for LazyJSON. The ability to take a JSON array represented as a string, parse it, split it into objects and serializes each of these objects back out to a string.
+This test represents the actual initial use case for LazyJSON—the ability to take a JSON array represented as a string, parse it, split it into objects, and serializes each of these objects back out to a string.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -51,13 +51,13 @@ GSON class based | 2.896755 | 6.745232 | 4.661751 | 4.645749
 Boon | 4.140396 | 9.548963 | 6.3975185 | 6.1944
 LoganSquare | 1.766217 | 4.984128 | 3.0102225 | 3.036142
 
-The nearest competitor is almost 4 times slower than LazyJSON. This is what it was designed for - any other use case is simply a bonus!
+The nearest competitor is almost 4 times slower than LazyJSON. This is what it was designed for—any other use case is simply a bonus!
 
 ### SmallObject Parse and Access
 
-When I initially wrote LazyJSON it seemed possible that it would be able to compete, performance wise, as a general JSON parser if you were only interested in one or two fields from the objects you were parsing. My theory was that the initial speed gain achieved by the lazy parsing strategy would quickly be lost to the faster class based parsers as you pulled out more and more fields.
+When I initially wrote LazyJSON, it seemed possible that it would be able to compete, performance-wise, as a general JSON parser if you were only interested in one or two fields from the objects you were parsing. My theory was that the initial speed gain achieved by the lazy parsing strategy would quickly be lost to the faster class-based parsers as you pulled out more and more fields.
 
-However, that is not what I have found. The following test shows the results of pulling out all fields from the resulting objects. Thus forcing LazyJSON to do all the work it had initially skipped.
+However, that is not what I have found. The following test shows the results of pulling out all fields from the resulting objects. Thus, forcing LazyJSON to do all the work it had initially skipped.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -70,11 +70,11 @@ GSON class based | 1.771563 | 4.403068 | 2.82594425 | 2.844848
 Boon | 1.301495 | 3.130883 | 2.091181875 | 2.047607
 LoganSquare | 0.981453 | 4.024667 | 2.034693125 | 1.986652
 
-It is meaningfully faster than the fastest class based parser I have found (LoganSquare) and even faster than writing a hand written extraction of values using the token stream received from Jackson's JsonParser! I am sure there will be use cases where LazyJSON won't win out, but the initial expected limitation of it's design turned out to not be a real limitation at all.
+It is meaningfully faster than the fastest class-based parser I have found (LoganSquare), and even faster than writing a handwritten extraction of values using the token stream received from Jackson's JSONParser! I am sure there will be use cases where LazyJSON won't win out, but the initial expected limitation of its design turned out to not be a real limitation at all.
 
 ## MediumObject Tests
 
-These tests all use an array containing 1000 copies of a medium sized json object as their input. This object was created to mimic some of the simple data envelopes in use at DoubleDutch. It uses the SimpleObject from the last test as its payload. While still generated with some aspect of randomness, it generaly looks as follows:
+These tests all use an array containing 1000 copies of a medium-sized JSON object as their input. This object was created to mimic some of the simple data envelopes in use at DoubleDutch. It uses the SimpleObject from the last test as its payload. While still generated with some element of randomness, it generally looks as follows:
 
 ```javascript
 {
@@ -102,7 +102,7 @@ The source string for the MediumObject tests take up 297,193 characters.
 
 ### MediumObject Parse
 
-This test is executed in the same way as the SmallObject parse test. As the object size and complexity increases, LazyJSON gains an even bigger advantage over the other libraries tested.
+This test is executed in the same way as the SmallObject parse test. As the object size and complexity increase, LazyJSON gains an even bigger advantage over the other libraries tested.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -118,7 +118,7 @@ LoganSquare | 2.613197 | 7.311305 | 4.6290735 | 4.54955
 
 ### MediumObject Parse, Split and Serialize
 
-As can be seen in this test, the original use case for LazyJSON continues to win out performance wise as the object size and complexity grows.
+As can be seen in this test, the original use case for LazyJSON continues to win out performance-wise as the object size and complexity grow.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -132,7 +132,7 @@ LoganSquare | 4.333113 | 10.601473 | 6.776118 | 6.524095
 
 ## LargeObject Tests
 
-These tests all use an array containing 1000 copies of a larger object based loosely on the format of the metric data we use at DoubleDutch. It generaly looks as follows:
+These tests all use an array containing 1000 copies of a larger object based loosely on the format of the metric data we use at DoubleDutch. It generally looks as follows:
 
 ```javascript
 {
@@ -166,7 +166,7 @@ The source string for the LargeObject tests take up 551,768 characters.
 
 ### LargeObject Parse
 
-Once again, this test is executed in the same way as the SmallObject parse test. As the object size and complexity increases, LazyJSON gains an even bigger advantage over the other libraries tested. This test does not include LoganSquare as I was too Lazy to figure out how to get it to parse this object (I suspect it can't deal with the inner classes, but haven't investigated the matter). 
+Once again, this test is executed in the same way as the SmallObject parse test. As the object size and complexity increase, LazyJSON gains an even bigger advantage over the other libraries tested. This test does not include LoganSquare as I was too lazy to figure out how to get it to parse this object (I suspect it can't deal with the inner classes, but haven't investigated the matter). 
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -180,7 +180,7 @@ Boon | 4.100606 | 9.142838 | 5.808073 | 5.70455
 
 ### LargeObject Parse, Split and Serialize
 
-As can be seen in this test, the original use case for LazyJSON continues to win out performance wise as the object size and complexity grows.
+As can be seen in this test, the original use case for LazyJSON continues to win out performance-wise as the object size and complexity grow.
 
 JSON Library | Min | Max | Avg | Median
 -------------|-----|-----|-----|-------
@@ -193,11 +193,11 @@ Boon | 10.468966 | 25.870486 | 14.332774 | 13.447765
 
 ## Test Procedure and Library Versions
 
-I am sure I will get feedback saying that I'm using the wrong version of the different libraries I have compared LazyJSON to or that the way I'm using them is all wrong, or that the test is inherently unfair, or that the benchmark code was set up wrong... and a thousand other issues and comments. The purpose of this benchmark isn't to show that other libraries are slow, but instead to show that LazyJSON is extremely fast for its intended purpose - and that it turns out that it is competitively fast for the general use case too.
+I am sure I will get feedback saying that I'm using the wrong version of the different libraries to which I have compared LazyJSON, or that the way I'm using them is all wrong, or that the test is inherently unfair, or that the benchmark code was set up wrong, and a thousand other issues and comments. The purpose of this benchmark isn't to show that other libraries are slow, but instead to show that LazyJSON is extremely fast for its intended purpose, and that it turns out that it is competitively fast for the general use case too.
 
 Please send me all of your comments and help me improve this test so it shows off the other libraries using their best practices!
 
-The libraries used for this test were
+The libraries used for this test were:
 
 JSON Library | version
 -------------|--------

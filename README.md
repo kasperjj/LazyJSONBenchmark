@@ -1,6 +1,6 @@
 # LazyJSONBenchmark
 
-This repo contains a hacky benchmark test for LazyJSON for Java. You can find out more about LazyJSON at [https://github.com/doubledutch/LazyJSON](https://github.com/doubledutch/LazyJSON)
+This repo contains a hacky benchmark test for LazyJSON for Java. You can find out more about LazyJSON at [https://github.com/doubledutch/LazyJSON](https://github.com/doubledutch/LazyJSON) as well as in [this blogpost](http://engineering.doubledutch.me/h/i/275207067-the-curious-case-of-the-very-lazy-but-blazingly-fast-json-parser).
 
 All times referenced are in miliseconds. All tests were executed on a late 2013 13" Macbook Pro with a 2.4ghz core i5 cpu. If you have comments or suggestions for improvements to the benchmark, please reach out to me or file an issue here on github!
 
